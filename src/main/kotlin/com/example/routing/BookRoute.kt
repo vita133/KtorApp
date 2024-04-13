@@ -23,9 +23,9 @@ fun Route.bookRoutes() {
             val bookIdFromQuery = call.parameters["id"] ?: kotlin.run {
                 throw Exception("Please provide a valid id")
             }
-            val book = bookService.getBookById(bookIdFromQuery?.toIntOrNull())
+            val book = bookService.getBookById(bookIdFromQuery.toIntOrNull())
             if (book == null) {
-                call.respond(HttpStatusCode.NotFound, "Book not found");
+                call.respond(HttpStatusCode.NotFound, "Book not found")
             } else {
                 call.respond(book)
             }
@@ -46,7 +46,7 @@ fun Route.bookRoutes() {
             val bookIdFromQuery = call.parameters["id"] ?: kotlin.run {
                 throw Exception("Please provide a valid id")
             }
-            bookService.deleteBook(bookIdFromQuery?.toIntOrNull())
+            bookService.deleteBook(bookIdFromQuery.toIntOrNull())
             call.respond("Book is deleted")
         }
 
@@ -55,9 +55,9 @@ fun Route.bookRoutes() {
                 throw Exception("Please provide a valid id")
             }
             val requestBody = call.receive<Book>()
-            val book = bookService.updateBook(bookIdFromQuery?.toIntOrNull(), requestBody)
+            val book = bookService.updateBook(bookIdFromQuery.toIntOrNull(), requestBody)
             if (book == null) {
-                call.respond(HttpStatusCode.NotFound, "Book not found");
+                call.respond(HttpStatusCode.NotFound, "Book not found")
             } else {
                 call.respond(book)
             }
@@ -69,7 +69,7 @@ fun Route.bookRoutes() {
             }
             val book = bookService.getBookByTitle(bookTitleFromQuery)
             if (book == null) {
-                call.respond(HttpStatusCode.NotFound, "Book not found");
+                call.respond(HttpStatusCode.NotFound, "Book not found")
             } else {
                 call.respond(book)
             }

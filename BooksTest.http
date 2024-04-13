@@ -1,0 +1,41 @@
+POST http://127.0.0.1:8080/books
+Content-Type: application/json
+
+{
+  "id": 8,
+  "title": "1",
+  "author": "1",
+  "publications": "1"
+}
+
+###
+POST http://127.0.0.1:8080/books
+Content-Type: application/json
+
+{
+  "id": 9,
+  "title": "2",
+  "author": "2",
+  "publications": "2"
+}
+
+
+###
+GET http://127.0.0.1:8080/books
+Accept: application/json
+
+###
+GET http://127.0.0.1:8080/books/2
+Accept: application/json
+
+###
+GET http://127.0.0.1:8080/books/500
+Accept: application/json
+
+###
+DELETE http://127.0.0.1:8080/books/1
+Accept: text/plain
+
+###
+DELETE http://127.0.0.1:8080/books/500
+Accept: text/plain
