@@ -21,6 +21,39 @@ Content-Type: application/json
 
 
 ###
+PUT http://127.0.0.1:8080/books/3
+Content-Type: application/json
+
+{
+  "id": 2,
+  "title": "2",
+  "author": "2",
+  "publications": "2"
+}
+
+###
+PUT http://127.0.0.1:8080/books/100
+Content-Type: application/json
+
+{
+"id": 100,
+"title": "1",
+"author": "1",
+"publications": "1"
+}
+
+###
+PUT http://127.0.0.1:8080/books/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "1",
+  "author": "1",
+  "publications": "1"
+}
+
+###
 GET http://127.0.0.1:8080/books
 Accept: application/json
 

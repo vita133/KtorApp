@@ -46,11 +46,13 @@ fun Route.bookRoutes() {
             val bookIdFromQuery = call.parameters["id"] ?: kotlin.run {
                 throw Exception("Please provide a valid id")
             }
-            if(bookIdFromQuery.toIntOrNull() == null) {
-                call.respond(HttpStatusCode.BadRequest, "Please provide a valid id")
+            val book = bookService.getBookById(bookIdFromQuery.toIntOrNull())
+            if (book == null) {
+                call.respond(HttpStatusCode.NotFound, "Book not found")
+            } else {
+                bookService.deleteBook(bookIdFromQuery.toIntOrNull())
+                call.respond("Book is deleted")
             }
-            bookService.deleteBook(bookIdFromQuery.toIntOrNull())
-            call.respond("Book is deleted")
         }
 
         put("/{id}") {
@@ -58,6 +60,9 @@ fun Route.bookRoutes() {
                 throw Exception("Please provide a valid id")
             }
             val requestBody = call.receive<Book>()
+            if (bookIdFromQuery.toIntOrNull() != requestBody.id) {
+                call.respond(HttpStatusCode.BadRequest, "Please provide a valid id")
+            }
             val book = bookService.updateBook(bookIdFromQuery.toIntOrNull(), requestBody)
             if (book == null) {
                 call.respond(HttpStatusCode.NotFound, "Book not found")
