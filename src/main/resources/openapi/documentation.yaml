@@ -6,16 +6,6 @@ info:
 servers:
   - url: "http://localhost:8080"
 paths:
-  /json/kotlinx-serialization:
-    get:
-      description: ""
-      responses:
-        "200":
-          description: "OK"
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/Map_String"
   /:
     get:
       description: ""
@@ -163,88 +153,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Book"
-  /users:
-    post:
-      description: "Create user"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ExposedUser"
-        required: true
-      responses:
-        "201":
-          description: "Created"
-          content:
-            text/plain:
-              schema:
-                type: "integer"
-                format: "int32"
-  /users/{id}:
-    delete:
-      description: "Delete user"
-      parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "integer"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            '*/*':
-              schema:
-                type: "object"
-    get:
-      description: "Read user"
-      parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "integer"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ExposedUser"
-        "404":
-          description: "Not Found"
-          content:
-            '*/*':
-              schema:
-                type: "object"
-    put:
-      description: "Update user"
-      parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "integer"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ExposedUser"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            '*/*':
-              schema:
-                type: "object"
 components:
   schemas:
-    Map:
-      type: "object"
-      properties: {}
-    Map_String:
-      type: "string"
     Book:
       type: "object"
       properties:
@@ -261,13 +171,3 @@ components:
         - "title"
         - "author"
         - "publications"
-    ExposedUser:
-      type: "object"
-      properties:
-        name:
-          type: "string"
-        age:
-          type: "integer"
-          format: "int32"
-      required:
-        - "name"

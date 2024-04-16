@@ -33,8 +33,8 @@ fun Route.bookRoutes() {
 
         post {
             val requestBody = call.receive<Book>()
-            val existingBook = bookService.getBookById(requestBody.id)
-            if (existingBook != null) {
+            val book = bookService.getBookById(requestBody.id)
+            if (book != null) {
                 call.respond(HttpStatusCode.Conflict, "Book with id ${requestBody.id} already exists")
             } else {
                 bookService.addBook(requestBody)
@@ -45,6 +45,9 @@ fun Route.bookRoutes() {
         delete("/{id}") {
             val bookIdFromQuery = call.parameters["id"] ?: kotlin.run {
                 throw Exception("Please provide a valid id")
+            }
+            if(bookIdFromQuery.toIntOrNull() == null) {
+                call.respond(HttpStatusCode.BadRequest, "Please provide a valid id")
             }
             bookService.deleteBook(bookIdFromQuery.toIntOrNull())
             call.respond("Book is deleted")
