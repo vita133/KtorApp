@@ -62,6 +62,7 @@ fun Route.bookRoutes() {
             val requestBody = call.receive<Book>()
             if (bookIdFromQuery.toIntOrNull() != requestBody.id) {
                 call.respond(HttpStatusCode.BadRequest, "Please provide a valid id")
+                return@put
             }
             val book = bookService.updateBook(bookIdFromQuery.toIntOrNull(), requestBody)
             if (book == null) {

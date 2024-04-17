@@ -5,11 +5,27 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
 import com.example.models.Book
+import io.ktor.server.config.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlin.test.*
 
 class ApplicationTest {
+
+//    @Test
+//    fun testHello() = testApplication {
+//        environment {
+//            config = ApplicationConfig("application-custom.conf")
+//        }
+//    }
+
+//    @Test
+//    fun testDevEnvironment() = testApplication {
+//        environment {
+//            config = MapApplicationConfig("ktor.environment" to "dev")
+//        }
+//    }
+
     @Test
     fun testRoot() = testApplication {
         val response = client.get("/")
